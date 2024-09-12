@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Rutas from './Rutas.jsx';
-import passContext from './context/GlobalContext.jsx';
-
-
-
-const App = passContext(Rutas);
+import PassContext from './context/GlobalContext.jsx';
+import index from './style/index.css';
 
 ReactDOM.createRoot(document.querySelector('#app')).render(
-    <App />
+    <PassContext>
+        <Rutas/>
+    </PassContext>
 );

@@ -5,7 +5,7 @@ import { Context } from "../context/GlobalContext.jsx";
 const Form = () => {
     const { store, actions } = useContext(Context);  
 
-    const [fullName, setFullName] = useState("");
+    const [name, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [address, setAddress] = useState("");
@@ -32,29 +32,22 @@ const Form = () => {
         e.preventDefault();
 
         const contact = {
-            name: fullName,
+            name: name,
             phone: phone,
             email: email,
             address: address,
         };
+     
 
-        if (store.contactToEdit) {
+        if (store.contactToEdit != null ) {
         
             actions.putContact(store.contactToEdit.id, contact);
-        } else {
-            // Crea un nuevo contacto
-            actions.createContact(contact);
-        }
-
-     
-        if (actions.clearContactToEdit) {
             actions.clearContactToEdit();
         } else {
-            console.error("clearContactToEdit no está definido en actions.");
+            
+            actions.createContact(contact);
         }
-
-       
-        navigate("/");
+    navigate("/")
     };
 
     return (
@@ -64,8 +57,8 @@ const Form = () => {
                 <label htmlFor="fullName">Full Name</label>
                 <input 
                     type="text" 
-                    id="fullName" 
-                    value={fullName} 
+                    id="name" 
+                    value={name} 
                     placeholder="Full Name" 
                     onChange={(e) => setFullName(e.target.value)} 
                     required 
@@ -104,8 +97,8 @@ const Form = () => {
                 <button type="submit">Guardar</button>
             </form>
             <br />
-            <Link to="/">
-                <p className="btn btn-primary">or get back to contacts</p>
+            <Link to="/" >
+                or get back to contacts
             </Link>
         </div>
     );
